@@ -28,68 +28,72 @@
         <div class="bg-white p-10 rounded-3xl max-w-sm w-full text-center shadow-2xl mx-4 border-t-8 border-navy">
             <div class="text-green-500 text-6xl mb-4">✅</div>
             <h3 class="text-2xl font-bold text-navy mb-2">تم الإرسال بنجاح</h3>
-            <p class="text-gray-700 text-xl font-semibold leading-relaxed">مع تحيات مديرية ناحية الرضوية</p>
-            <button onclick="closeModal()" class="mt-8 bg-navy text-white px-8 py-3 rounded-xl font-bold w-full shadow-lg hover:bg-blue-900 transition">إغلاق</button>
+            <p class="text-gray-700 text-xl font-semibold leading-relaxed mb-4 text-center">مع تحيات مديرية ناحية الرضوية</p>
+            <button onclick="closeModal()" class="bg-navy text-white px-8 py-3 rounded-xl font-bold w-full shadow-lg hover:bg-blue-900 transition">إغلاق</button>
         </div>
     </div>
 
+    <!-- الهيدر -->
     <nav class="bg-white shadow-md border-b-4 border-gold p-4 sticky top-0 z-50">
         <div class="max-w-6xl mx-auto flex justify-between items-center">
             <div class="flex items-center gap-3">
-                <div class="bg-navy p-2 rounded-lg text-white font-bold">الرضوية</div>
+                <div class="bg-navy p-2 rounded-lg text-white font-bold text-sm">الرضوية</div>
                 <h1 class="text-navy font-bold md:text-xl">مديرية ناحية الرضوية</h1>
             </div>
         </div>
     </nav>
 
-    <header class="hero-section text-white py-10 px-4 text-center">
-        <h2 class="text-3xl font-bold mb-2">منصة صوت المواطن</h2>
+    <!-- واجهة الترحيب -->
+    <header class="hero-section text-white py-12 px-4 text-center">
+        <h2 class="text-3xl font-bold mb-2 italic">صوتك يصل... وملاحظتك تصنع الفرق</h2>
         <p class="opacity-90 italic">«نستمع إليكم… لنخدمكم بشكل أفضل»</p>
     </header>
 
+    <!-- النموذج الرئيسي -->
     <main class="max-w-4xl mx-auto -mt-10 mb-20 px-4">
         <div class="bg-white rounded-3xl shadow-2xl p-6 md:p-10 border border-gray-100">
             <form id="complaintForm" class="space-y-6">
                 
                 <!-- خيار الإرسال السري -->
-                <div class="bg-blue-50 p-4 rounded-2xl border border-blue-100">
+                <div class="bg-blue-50 p-5 rounded-2xl border border-blue-100">
                     <div class="flex items-center justify-between">
                         <span class="font-bold text-navy">إرسال الطلب بشكل سري؟</span>
                         <label class="relative inline-flex items-center cursor-pointer">
                             <input type="checkbox" id="secretToggle" class="sr-only peer">
-                            <div class="w-11 h-6 bg-gray-300 rounded-full peer peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:right-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-gold"></div>
+                            <div class="w-12 h-6 bg-gray-300 rounded-full peer peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:right-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-gold"></div>
                         </label>
                     </div>
-                    <p id="secretNote" class="text-xs text-blue-800 font-bold mt-2 hidden bg-blue-100 p-3 rounded-lg border border-blue-200">
+                    <p id="secretNote" class="text-xs text-blue-800 font-bold mt-3 hidden bg-blue-100 p-3 rounded-lg border border-blue-200">
                         ⚠️ سيتم إخفاء جهة التوجيه.. الطلب يطلع عليه مدير الناحية الحقوقي علي غضب الغزالي المحترم فقط.
                     </p>
                 </div>
 
+                <!-- الاسم والهاتف -->
                 <div class="grid md:grid-cols-2 gap-6">
                     <div>
-                        <label class="block text-gray-700 font-bold mb-2">الاسم الكامل</label>
-                        <input type="text" id="userName" placeholder="اكتب اسمك الثلاثي" required class="w-full p-4 rounded-xl border bg-gray-50 outline-none focus:ring-2 focus:ring-navy transition">
+                        <label class="block text-gray-700 font-bold mb-2">الاسم الثلاثي الكامل</label>
+                        <input type="text" id="userName" placeholder="الاسم الكامل" required class="w-full p-4 rounded-xl border bg-gray-50 outline-none focus:ring-2 focus:ring-navy">
                     </div>
                     <div>
                         <label class="block text-gray-700 font-bold mb-2">رقم الهاتف</label>
-                        <input type="tel" id="userPhone" placeholder="07XXXXXXXX" required class="w-full p-4 rounded-xl border bg-gray-50 outline-none focus:ring-2 focus:ring-navy transition">
+                        <input type="tel" id="userPhone" placeholder="رقم الهاتف الخاص بك" required class="w-full p-4 rounded-xl border bg-gray-50 outline-none focus:ring-2 focus:ring-navy">
                     </div>
                 </div>
 
+                <!-- توجيه الطلب ونوع الطلب -->
                 <div class="grid md:grid-cols-2 gap-6">
                     <div id="deptContainer">
-                        <label class="block text-gray-700 font-bold mb-2">توجه الملاحظة إلى:</label>
+                        <label class="block text-gray-700 font-bold mb-2">توجيه الطلب إلى:</label>
                         <select id="targetDept" class="w-full p-4 rounded-xl border bg-white outline-none focus:ring-2 focus:ring-navy">
-                            <option value="مدير الناحية مباشرة">مدير الناحية (مباشر)</option>
-                            <option value="الشعبة القانونية">الشعبة القانونية</option>
-                            <option value="شعبة المولدات">شعبة المولدات</option>
-                            <option value="شعبة المختارية">شعبة المختارية</option>
-                            <option value="الخدمات والبلدية">الخدمات والبلدية</option>
+                            <option value="المدير">مدير الناحية مباشرة</option>
+                            <option value="القانونية">الشعبة القانونية</option>
+                            <option value="المولدات">شعبة المولدات</option>
+                            <option value="المختارية">شعبة المختارية</option>
                         </select>
                     </div>
-                    <div id="typeContainer">
+                    <div>
                         <label class="block text-gray-700 font-bold mb-2">نوع الطلب:</label>
-                        <select id="requestType" onchange="updateButtonText()" class="w-full p-4 rounded-xl border bg-white outline-none focus:ring-2 focus:ring-navy">
+                        <select id="requestType" onchange="updateButtonText()" class="w-full p-4 rounded-xl border bg-white outline-none">
                             <option value="شكوى">شكوى</option>
                             <option value="ملاحظة">ملاحظة</option>
                             <option value="مقترح">مقترح</option>
@@ -97,38 +101,39 @@
                     </div>
                 </div>
 
+                <!-- المنطقة والمختار -->
                 <div class="grid md:grid-cols-2 gap-6">
                     <div>
                         <label class="block text-gray-700 font-bold mb-2">المنطقة / الحي</label>
-                        <input type="text" id="regionName" placeholder="اسم المنطقة" required class="w-full p-4 rounded-xl border bg-gray-50 outline-none focus:ring-2 focus:ring-navy">
+                        <input type="text" id="regionName" placeholder="اسم المنطقة" required class="w-full p-4 rounded-xl border bg-gray-50 outline-none">
                     </div>
                     <div>
                         <label class="block text-gray-700 font-bold mb-2">اسم المختار</label>
-                        <input type="text" id="mukhtarName" placeholder="اكتب اسم المختار" required class="w-full p-4 rounded-xl border bg-gray-50 outline-none focus:ring-2 focus:ring-navy">
+                        <input type="text" id="mukhtarName" placeholder="اسم مختار المنطقة" required class="w-full p-4 rounded-xl border bg-gray-50 outline-none">
                     </div>
                 </div>
 
+                <!-- الموضوع والتفاصيل -->
                 <div>
                     <label class="block text-gray-700 font-bold mb-2">عنوان الملاحظة</label>
-                    <input type="text" id="subject" placeholder="موضوع مختصر" required class="w-full p-4 rounded-xl border outline-none focus:border-navy">
+                    <input type="text" id="subject" placeholder="اكتب عنواناً لموضوعك" required class="w-full p-4 rounded-xl border outline-none">
                 </div>
-
                 <div>
-                    <label class="block text-gray-700 font-bold mb-2">التفاصيل</label>
-                    <textarea id="details" rows="4" placeholder="اكتب هنا التفاصيل..." required class="w-full p-4 rounded-xl border outline-none focus:border-navy"></textarea>
+                    <label class="block text-gray-700 font-bold mb-2">تفاصيل الطلب</label>
+                    <textarea id="details" rows="4" placeholder="اكتب هنا تفاصيل المشكلة أو المقترح..." required class="w-full p-4 rounded-xl border outline-none focus:border-navy"></textarea>
                 </div>
 
+                <!-- المرفقات والموقع -->
                 <div class="grid md:grid-cols-2 gap-6 items-end">
                     <div>
-                        <label class="block text-gray-700 font-bold mb-2">إرفاق صورة</label>
-                        <input type="file" id="userImage" accept="image/*" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-navy file:text-white hover:file:bg-blue-800 transition">
+                        <label class="block text-gray-700 font-bold mb-2">إرفاق صورة (اختياري)</label>
+                        <input type="file" id="userImage" accept="image/*" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:bg-navy file:text-white hover:file:bg-blue-900 transition">
                     </div>
-                    <button type="button" onclick="getLocation()" id="locBtn" class="bg-gray-100 p-4 rounded-xl border font-bold text-gray-700 hover:bg-gray-200 transition">
-                       📍 تحديد الموقع الجغرافي
-                    </button>
+                    <button type="button" onclick="getLocation()" id="locBtn" class="bg-gray-100 p-4 rounded-xl border font-bold text-gray-700 hover:bg-gray-200 transition">📍 تحديد الموقع الجغرافي</button>
                     <input type="hidden" id="userCoords">
                 </div>
 
+                <!-- زر الإرسال -->
                 <button type="submit" id="submitBtn" class="w-full bg-navy text-white py-5 rounded-2xl font-bold text-2xl hover:bg-blue-900 shadow-xl transition transform active:scale-95">
                     إرسال الشكوى
                 </button>
@@ -136,27 +141,39 @@
         </div>
     </main>
 
+    <!-- الفوتر -->
     <footer class="bg-gray-900 text-gray-400 py-10 text-center border-t-4 border-gold">
-        <p class="font-bold text-white mb-2">مديرية ناحية الرضوية - المكتب الإعلامي</p>
-        <p class="text-sm">جميع الحقوق محفوظة © 2026</p>
-        <div class="mt-6 pt-6 border-t border-gray-800">
-            <p class="text-xs italic text-gray-500">تصميم وبرمجة علي دوهان الحسيني</p>
+        <p class="font-bold text-white mb-2 italic text-lg">مديرية ناحية الرضوية - المكتب الإعلامي</p>
+        <p class="text-sm opacity-60">جميع الحقوق محفوظة © 2026</p>
+        <div class="mt-8 pt-6 border-t border-gray-800">
+            <p class="text-sm font-bold italic text-white tracking-widest">تصميم وبرمجة علي دوهان الحسيني</p>
         </div>
     </footer>
 
     <script>
+        // الإعدادات الرئيسية
+        const BOT_TOKEN = "8986832171:AAEDJzSHact2lTzTO2PnxLITcdkhtjm1F9o";
+        const DIRECTOR_CHAT_ID = "290647010"; // الأيدي الخاص بك كمدير
+
+        // توزيع الأيدي على المجموعات (التجربة حالياً على حسابك)
+        const GROUPS_IDS = {
+            "المدير": DIRECTOR_CHAT_ID,
+            "القانونية": "290647010", // استبدلها لاحقاً بأيدي المجموعة
+            "المولدات": "290647010", // استبدلها لاحقاً بأيدي المجموعة
+            "المختارية": "290647010" // استبدلها لاحقاً بأيدي المجموعة
+        };
+
         const secretToggle = document.getElementById('secretToggle');
         const deptContainer = document.getElementById('deptContainer');
         const secretNote = document.getElementById('secretNote');
 
-        // تحديث نص الزر
+        // تحديث نص زر الإرسال
         function updateButtonText() {
             const type = document.getElementById('requestType').value;
-            const btn = document.getElementById('submitBtn');
-            btn.innerText = "إرسال " + type;
+            document.getElementById('submitBtn').innerText = "إرسال " + type;
         }
 
-        // إخفاء خانة الشعب عند تفعيل سري
+        // إخفاء الشعب عند تفعيل خيار سري
         secretToggle.addEventListener('change', function() {
             if(this.checked) {
                 deptContainer.style.display = 'none';
@@ -167,7 +184,7 @@
             }
         });
 
-        // تحديد الموقع
+        // الحصول على الموقع الجغرافي
         function getLocation() {
             const btn = document.getElementById('locBtn');
             if (navigator.geolocation) {
@@ -180,7 +197,7 @@
             }
         }
 
-        // إرسال البيانات للتليجرام
+        // الإرسال الفعلي للتليجرام
         document.getElementById('complaintForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             const btn = document.getElementById('submitBtn');
@@ -188,50 +205,55 @@
             btn.innerText = "جاري الإرسال...";
             btn.disabled = true;
 
-            const botToken = "8986832171:AAEDJzSHact2lTzTO2PnxLITcdkhtjm1F9o";
-            const chatId = "290647010";
-
             const isSecret = secretToggle.checked;
             const name = document.getElementById('userName').value;
             const phone = document.getElementById('userPhone').value;
-            const target = isSecret ? "مدير الناحية (حصراً)" : document.getElementById('targetDept').value;
+            const dept = isSecret ? "المدير (سري)" : document.getElementById('targetDept').value;
             const type = document.getElementById('requestType').value;
             const region = document.getElementById('regionName').value;
             const mukhtar = document.getElementById('mukhtarName').value;
             const sub = document.getElementById('subject').value;
-            const desc = document.getElementById('details').value;
-            const loc = document.getElementById('userCoords').value || "لم يحدد";
+            const details = document.getElementById('details').value;
+            const loc = document.getElementById('userCoords').value || "غير محدد";
             const imageFile = document.getElementById('userImage').files[0];
 
-            const fullMsg = `📢 *بلاغ جديد من المنصة*%0A%0A` +
-                            `🏢 *إلى:* ${target}%0A` +
-                            `👤 *سري:* ${isSecret ? "نعم ✅" : "لا"}%0A` +
-                            `📝 *الاسم:* ${name}%0A` +
+            // تحديد وجهة الرسالة (إذا سري تذهب للمدير، وإلا للمجموعة المختارة)
+            const targetID = isSecret ? DIRECTOR_CHAT_ID : (GROUPS_IDS[dept] || DIRECTOR_CHAT_ID);
+
+            const msgText = `📢 *بلاغ جديد من المنصة*%0A%0A` +
+                            `🏢 *إلى:* ${isSecret ? "مدير الناحية (سري 👤)" : dept}%0A` +
+                            `👤 *الاسم:* ${name}%0A` +
                             `📞 *الهاتف:* ${phone}%0A` +
                             `🌍 *المنطقة:* ${region}%0A` +
                             `👴 *المختار:* ${mukhtar}%0A` +
                             `🏷 *النوع:* ${type}%0A` +
                             `📌 *الموضوع:* ${sub}%0A` +
-                            `💬 *التفاصيل:* ${desc}%0A` +
+                            `💬 *التفاصيل:* ${details}%0A` +
                             `📍 *الموقع:* ${loc}`;
 
             try {
                 if (imageFile) {
-                    const formData = new FormData();
-                    formData.append('chat_id', chatId);
-                    formData.append('photo', imageFile);
-                    formData.append('caption', `إلى: ${target}\nسري: ${isSecret ? "نعم" : "لا"}\nالاسم: ${name}\nالهاتف: ${phone}\nالمنطقة: ${region}\nالمختار: ${mukhtar}\nالنوع: ${type}\nالموضوع: ${sub}\nالتفاصيل: ${desc}\nالموقع: ${loc}`);
-                    await fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, { method: 'POST', body: formData });
+                    const fd = new FormData();
+                    fd.append('chat_id', targetID);
+                    fd.append('photo', imageFile);
+                    fd.append('caption', `بلاغ جديد: ${sub}\nإلى: ${isSecret ? "المدير (سري)" : dept}\nالاسم: ${name}\nالهاتف: ${phone}\nالمنطقة: ${region}\nالمختار: ${mukhtar}\nالتفاصيل: ${details}\nالموقع: ${loc}`);
+                    await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, { method: 'POST', body: fd });
                 } else {
-                    await fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${fullMsg}&parse_mode=Markdown`);
+                    await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${targetID}&text=${msgText}&parse_mode=Markdown`);
                 }
 
+                // إظهار نسخة للمدير إذا لم تكن موجهة له (اختياري للعلم)
+                if(!isSecret && targetID !== DIRECTOR_CHAT_ID) {
+                    await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${DIRECTOR_CHAT_ID}&text=${encodeURIComponent("نسخة إطلاع للمدير:\n" + msgText)}`);
+                }
+
+                // عرض رسالة النجاح
                 document.getElementById('successModal').style.display = 'flex';
                 this.reset();
-                deptContainer.style.display = 'block'; // إعادة إظهار الخانة بعد التصفير
+                deptContainer.style.display = 'block';
                 updateButtonText();
             } catch (error) {
-                alert("حدث خطأ أثناء الإرسال.");
+                alert("حدث خطأ أثناء الإرسال، يرجى المحاولة لاحقاً.");
             } finally {
                 btn.innerText = originalText;
                 btn.disabled = false;
