@@ -25,11 +25,11 @@
 
     <!-- نافذة النجاح -->
     <div id="successModal">
-        <div class="bg-white p-8 rounded-3xl max-w-sm w-full text-center shadow-2xl mx-4 border-t-8 border-green-500">
+        <div class="bg-white p-10 rounded-3xl max-w-sm w-full text-center shadow-2xl mx-4 border-t-8 border-navy">
             <div class="text-green-500 text-6xl mb-4">✅</div>
             <h3 class="text-2xl font-bold text-navy mb-2">تم الإرسال بنجاح</h3>
-            <p class="text-gray-700 leading-relaxed">شكراً لكم وسيتم معالجة المشكلة وتنفيذ المقترح والملاحظة بأسرع وقت ممكن.</p>
-            <button onclick="closeModal()" class="mt-6 bg-navy text-white px-8 py-3 rounded-xl font-bold w-full shadow-lg hover:bg-blue-900 transition">إغلاق</button>
+            <p class="text-gray-700 text-xl font-semibold leading-relaxed">مع تحيات مديرية ناحية الرضوية</p>
+            <button onclick="closeModal()" class="mt-8 bg-navy text-white px-8 py-3 rounded-xl font-bold w-full shadow-lg hover:bg-blue-900 transition">إغلاق</button>
         </div>
     </div>
 
@@ -61,7 +61,7 @@
                         </label>
                     </div>
                     <p id="secretNote" class="text-xs text-blue-800 font-bold mt-2 hidden bg-blue-100 p-3 rounded-lg border border-blue-200">
-                        ⚠️ يطلع عليها مدير الناحية الحقوقي علي غضب الغزالي المحترم فقط.
+                        ⚠️ سيتم إخفاء جهة التوجيه.. الطلب يطلع عليه مدير الناحية الحقوقي علي غضب الغزالي المحترم فقط.
                     </p>
                 </div>
 
@@ -77,7 +77,7 @@
                 </div>
 
                 <div class="grid md:grid-cols-2 gap-6">
-                    <div>
+                    <div id="deptContainer">
                         <label class="block text-gray-700 font-bold mb-2">توجه الملاحظة إلى:</label>
                         <select id="targetDept" class="w-full p-4 rounded-xl border bg-white outline-none focus:ring-2 focus:ring-navy">
                             <option value="مدير الناحية مباشرة">مدير الناحية (مباشر)</option>
@@ -87,7 +87,7 @@
                             <option value="الخدمات والبلدية">الخدمات والبلدية</option>
                         </select>
                     </div>
-                    <div>
+                    <div id="typeContainer">
                         <label class="block text-gray-700 font-bold mb-2">نوع الطلب:</label>
                         <select id="requestType" onchange="updateButtonText()" class="w-full p-4 rounded-xl border bg-white outline-none focus:ring-2 focus:ring-navy">
                             <option value="شكوى">شكوى</option>
@@ -104,7 +104,7 @@
                     </div>
                     <div>
                         <label class="block text-gray-700 font-bold mb-2">اسم المختار</label>
-                        <input type="text" id="mukhtarName" placeholder="اختياري" class="w-full p-4 rounded-xl border bg-gray-50 outline-none focus:ring-2 focus:ring-navy">
+                        <input type="text" id="mukhtarName" placeholder="اكتب اسم المختار" required class="w-full p-4 rounded-xl border bg-gray-50 outline-none focus:ring-2 focus:ring-navy">
                     </div>
                 </div>
 
@@ -115,16 +115,16 @@
 
                 <div>
                     <label class="block text-gray-700 font-bold mb-2">التفاصيل</label>
-                    <textarea id="details" rows="4" placeholder="اكتب هنا تفاصيل المشكلة أو المقترح..." required class="w-full p-4 rounded-xl border outline-none focus:border-navy"></textarea>
+                    <textarea id="details" rows="4" placeholder="اكتب هنا التفاصيل..." required class="w-full p-4 rounded-xl border outline-none focus:border-navy"></textarea>
                 </div>
 
                 <div class="grid md:grid-cols-2 gap-6 items-end">
                     <div>
-                        <label class="block text-gray-700 font-bold mb-2">إرفاق صورة (إن وجد)</label>
+                        <label class="block text-gray-700 font-bold mb-2">إرفاق صورة</label>
                         <input type="file" id="userImage" accept="image/*" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-navy file:text-white hover:file:bg-blue-800 transition">
                     </div>
                     <button type="button" onclick="getLocation()" id="locBtn" class="bg-gray-100 p-4 rounded-xl border font-bold text-gray-700 hover:bg-gray-200 transition">
-                       📍 تحديد موقع المشكلة
+                       📍 تحديد الموقع الجغرافي
                     </button>
                     <input type="hidden" id="userCoords">
                 </div>
@@ -136,24 +136,38 @@
         </div>
     </main>
 
-    <footer class="bg-gray-900 text-gray-500 py-10 text-center border-t-4 border-gold">
-        <p class="font-bold text-white">مديرية ناحية الرضوية - المكتب الإعلامي</p>
-        <p class="mt-2 text-sm">جميع الحقوق محفوظة © 2026</p>
+    <footer class="bg-gray-900 text-gray-400 py-10 text-center border-t-4 border-gold">
+        <p class="font-bold text-white mb-2">مديرية ناحية الرضوية - المكتب الإعلامي</p>
+        <p class="text-sm">جميع الحقوق محفوظة © 2026</p>
+        <div class="mt-6 pt-6 border-t border-gray-800">
+            <p class="text-xs italic text-gray-500">تصميم وبرمجة علي دوهان الحسيني</p>
+        </div>
     </footer>
 
     <script>
-        // 1. تحديث النصوص بناءً على الاختيارات
+        const secretToggle = document.getElementById('secretToggle');
+        const deptContainer = document.getElementById('deptContainer');
+        const secretNote = document.getElementById('secretNote');
+
+        // تحديث نص الزر
         function updateButtonText() {
             const type = document.getElementById('requestType').value;
             const btn = document.getElementById('submitBtn');
             btn.innerText = "إرسال " + type;
         }
 
-        document.getElementById('secretToggle').addEventListener('change', function() {
-            document.getElementById('secretNote').style.display = this.checked ? 'block' : 'none';
+        // إخفاء خانة الشعب عند تفعيل سري
+        secretToggle.addEventListener('change', function() {
+            if(this.checked) {
+                deptContainer.style.display = 'none';
+                secretNote.style.display = 'block';
+            } else {
+                deptContainer.style.display = 'block';
+                secretNote.style.display = 'none';
+            }
         });
 
-        // 2. تحديد الموقع
+        // تحديد الموقع
         function getLocation() {
             const btn = document.getElementById('locBtn');
             if (navigator.geolocation) {
@@ -161,12 +175,12 @@
                 navigator.geolocation.getCurrentPosition((p) => {
                     document.getElementById('userCoords').value = `https://maps.google.com/?q=${p.coords.latitude},${p.coords.longitude}`;
                     btn.innerText = "✅ تم تحديد الموقع";
-                    btn.classList.add('bg-green-100', 'text-green-700', 'border-green-300');
+                    btn.classList.add('bg-green-100', 'text-green-700');
                 }, () => { btn.innerText = "❌ فشل التحديد"; });
             }
         }
 
-        // 3. إرسال البيانات للتليجرام
+        // إرسال البيانات للتليجرام
         document.getElementById('complaintForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             const btn = document.getElementById('submitBtn');
@@ -174,18 +188,16 @@
             btn.innerText = "جاري الإرسال...";
             btn.disabled = true;
 
-            // --- معلومات البوت الخاصة بك ---
             const botToken = "8986832171:AAEDJzSHact2lTzTO2PnxLITcdkhtjm1F9o";
             const chatId = "290647010";
-            // ------------------------------
 
-            const isSecret = document.getElementById('secretToggle').checked ? "نعم (للمدير فقط 👤)" : "لا";
+            const isSecret = secretToggle.checked;
             const name = document.getElementById('userName').value;
             const phone = document.getElementById('userPhone').value;
-            const target = document.getElementById('targetDept').value;
+            const target = isSecret ? "مدير الناحية (حصراً)" : document.getElementById('targetDept').value;
             const type = document.getElementById('requestType').value;
             const region = document.getElementById('regionName').value;
-            const mukhtar = document.getElementById('mukhtarName').value || "غير مذكور";
+            const mukhtar = document.getElementById('mukhtarName').value;
             const sub = document.getElementById('subject').value;
             const desc = document.getElementById('details').value;
             const loc = document.getElementById('userCoords').value || "لم يحدد";
@@ -193,7 +205,7 @@
 
             const fullMsg = `📢 *بلاغ جديد من المنصة*%0A%0A` +
                             `🏢 *إلى:* ${target}%0A` +
-                            `👤 *سري:* ${isSecret}%0A` +
+                            `👤 *سري:* ${isSecret ? "نعم ✅" : "لا"}%0A` +
                             `📝 *الاسم:* ${name}%0A` +
                             `📞 *الهاتف:* ${phone}%0A` +
                             `🌍 *المنطقة:* ${region}%0A` +
@@ -208,7 +220,7 @@
                     const formData = new FormData();
                     formData.append('chat_id', chatId);
                     formData.append('photo', imageFile);
-                    formData.append('caption', `بلاغ جديد: ${target}\nسري: ${isSecret}\nالاسم: ${name}\nالهاتف: ${phone}\nالمنطقة: ${region}\nالمختار: ${mukhtar}\nالنوع: ${type}\nالموضوع: ${sub}\nالتفاصيل: ${desc}\nالموقع: ${loc}`);
+                    formData.append('caption', `إلى: ${target}\nسري: ${isSecret ? "نعم" : "لا"}\nالاسم: ${name}\nالهاتف: ${phone}\nالمنطقة: ${region}\nالمختار: ${mukhtar}\nالنوع: ${type}\nالموضوع: ${sub}\nالتفاصيل: ${desc}\nالموقع: ${loc}`);
                     await fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, { method: 'POST', body: formData });
                 } else {
                     await fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${fullMsg}&parse_mode=Markdown`);
@@ -216,9 +228,10 @@
 
                 document.getElementById('successModal').style.display = 'flex';
                 this.reset();
+                deptContainer.style.display = 'block'; // إعادة إظهار الخانة بعد التصفير
                 updateButtonText();
             } catch (error) {
-                alert("حدث خطأ أثناء الإرسال. تأكد من اتصال الإنترنت.");
+                alert("حدث خطأ أثناء الإرسال.");
             } finally {
                 btn.innerText = originalText;
                 btn.disabled = false;
