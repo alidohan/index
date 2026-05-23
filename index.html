@@ -15,33 +15,28 @@
                         url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1000&q=80');
             background-size: cover;
         }
-        /* تصميم رسالة النجاح */
         #successModal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.7);
-            z-index: 9999;
-            align-items: center; justify-content: center;
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8); z-index: 9999; align-items: center; justify-content: center;
         }
     </style>
 </head>
 <body>
 
-    <!-- رسالة النجاح (تظهر بعد الإرسال) -->
+    <!-- نافذة النجاح -->
     <div id="successModal">
-        <div class="bg-white p-8 rounded-2xl max-w-sm w-full text-center shadow-2xl mx-4">
+        <div class="bg-white p-8 rounded-2xl max-w-sm w-full text-center shadow-2xl mx-4 border-t-8 border-green-500">
             <div class="text-green-500 text-6xl mb-4">✅</div>
             <h3 class="text-2xl font-bold text-navy mb-2">تم الإرسال بنجاح</h3>
-            <p class="text-gray-600">تم إرسالها وسيتم التحقق من المعلومات المرسلة وحل المشكلة وبأسرع وقت.</p>
-            <button onclick="closeModal()" class="mt-6 bg-navy text-white px-8 py-2 rounded-lg font-bold">إغلاق</button>
+            <p class="text-gray-600 text-lg">تم إرسالها وسيتم التحقق من المعلومات المرسلة وحل المشكلة وبأسرع وقت.</p>
+            <button onclick="closeModal()" class="mt-6 bg-navy text-white px-8 py-3 rounded-xl font-bold w-full shadow-lg">حسناً</button>
         </div>
     </div>
 
-    <nav class="bg-white shadow-md border-b-4 border-gold p-4">
+    <nav class="bg-white shadow-md border-b-4 border-gold p-4 sticky top-0 z-50">
         <div class="max-w-6xl mx-auto flex justify-between items-center">
             <div class="flex items-center gap-3">
-                <div class="bg-navy p-2 rounded-lg text-white font-bold">الرضوية</div>
+                <div class="bg-navy p-2 rounded-lg text-white font-bold text-sm">الرضوية</div>
                 <h1 class="text-navy font-bold md:text-xl">مديرية ناحية الرضوية</h1>
             </div>
         </div>
@@ -49,14 +44,14 @@
 
     <header class="hero-section text-white py-12 px-4 text-center">
         <h2 class="text-3xl font-bold mb-2">منصة صوت المواطن</h2>
-        <p class="opacity-90">«نستمع إليكم… لنخدمكم بشكل أفضل»</p>
+        <p class="opacity-90 italic">«نستمع إليكم… لنخدمكم بشكل أفضل»</p>
     </header>
 
     <main class="max-w-3xl mx-auto -mt-10 mb-20 px-4">
-        <div class="bg-white rounded-2xl shadow-xl p-6 md:p-10">
+        <div class="bg-white rounded-2xl shadow-xl p-6 md:p-10 border border-gray-100">
             <form id="complaintForm" class="space-y-5">
                 
-                <!-- الإرسال السري - تم إصلاح الحركة -->
+                <!-- الإرسال السري -->
                 <div class="bg-blue-50 p-4 rounded-xl flex items-center justify-between border border-blue-100">
                     <span class="font-bold text-navy">إرسال الطلب بشكل سري؟</span>
                     <label class="relative inline-flex items-center cursor-pointer">
@@ -65,102 +60,113 @@
                     </label>
                 </div>
 
-                <div class="grid md:grid-cols-2 gap-4" id="personalInfo">
-                    <input type="text" id="userName" placeholder="الاسم الكامل" class="w-full p-3 rounded-lg border focus:ring-2 focus:ring-navy outline-none">
-                    <input type="tel" id="userPhone" placeholder="رقم الهاتف" class="w-full p-3 rounded-lg border focus:ring-2 focus:ring-navy outline-none">
+                <div class="grid md:grid-cols-2 gap-4" id="personalFields">
+                    <input type="text" id="name" placeholder="الاسم الكامل" class="w-full p-4 rounded-xl border outline-none focus:ring-2 focus:ring-navy">
+                    <input type="tel" id="phone" placeholder="رقم الهاتف" class="w-full p-4 rounded-xl border outline-none focus:ring-2 focus:ring-navy">
                 </div>
 
                 <div class="grid md:grid-cols-2 gap-4">
-                    <select id="requestType" class="w-full p-3 rounded-lg border outline-none">
+                    <select id="type" class="w-full p-4 rounded-xl border outline-none bg-white">
                         <option>شكوى</option>
                         <option>ملاحظة</option>
                         <option>مقترح</option>
+                        <option>طلب خدمة</option>
                     </select>
-                    <button type="button" onclick="getLocation()" id="locBtn" class="bg-gray-100 p-3 rounded-lg border text-sm hover:bg-gray-200">
+                    <button type="button" onclick="getLocation()" id="locBtn" class="bg-gray-100 p-4 rounded-xl border text-sm hover:bg-gray-200 transition">
                        📍 تحديد موقع المشكلة
                     </button>
-                    <input type="hidden" id="userLocation">
+                    <input type="hidden" id="coords">
                 </div>
 
-                <input type="text" id="subject" placeholder="عنوان الموضوع" class="w-full p-3 rounded-lg border outline-none focus:border-navy" required>
-                <textarea id="message" rows="4" placeholder="اكتب تفاصيل طلبك هنا..." class="w-full p-3 rounded-lg border outline-none focus:border-navy" required></textarea>
+                <input type="text" id="subject" placeholder="عنوان الملاحظة" class="w-full p-4 rounded-xl border outline-none focus:border-navy" required>
+                <textarea id="details" rows="5" placeholder="اكتب تفاصيل طلبك هنا..." class="w-full p-4 rounded-xl border outline-none focus:border-navy" required></textarea>
 
-                <button type="submit" class="w-full bg-navy text-white py-4 rounded-xl font-bold text-xl hover:bg-blue-900 shadow-lg transition">
+                <button type="submit" id="submitBtn" class="w-full bg-navy text-white py-4 rounded-2xl font-bold text-xl hover:bg-blue-900 shadow-xl transition transform active:scale-95">
                     إرسال الملاحظة
                 </button>
             </form>
         </div>
     </main>
 
-    <footer class="bg-gray-900 text-gray-500 py-6 text-center border-t-4 border-gold">
+    <footer class="bg-gray-900 text-gray-500 py-8 text-center border-t-4 border-gold">
         <p>جميع الحقوق محفوظة © 2026 - مديرية ناحية الرضوية</p>
+        <p class="text-xs mt-2 opacity-50 italic text-white">"نحن هنا لخدمتكم وإيصال صوتكم"</p>
     </footer>
 
     <script>
-        // إخفاء المعلومات الشخصية عند اختيار "سري"
+        // 1. التحكم في الإرسال السري
         const secretToggle = document.getElementById('secretToggle');
         secretToggle.addEventListener('change', function() {
-            const infoBox = document.getElementById('personalInfo');
+            const fields = document.getElementById('personalFields');
             if(this.checked) {
-                infoBox.style.opacity = '0.3';
-                infoBox.querySelectorAll('input').forEach(i => i.disabled = true);
+                fields.style.opacity = '0.3';
+                fields.querySelectorAll('input').forEach(i => i.disabled = true);
             } else {
-                infoBox.style.opacity = '1';
-                infoBox.querySelectorAll('input').forEach(i => i.disabled = false);
+                fields.style.opacity = '1';
+                fields.querySelectorAll('input').forEach(i => i.disabled = false);
             }
         });
 
-        // تحديد الموقع
+        // 2. تحديد الموقع
         function getLocation() {
             const btn = document.getElementById('locBtn');
             if (navigator.geolocation) {
                 btn.innerText = "جاري التحديد...";
-                navigator.geolocation.getCurrentPosition(
-                    (p) => {
-                        document.getElementById('userLocation').value = `https://maps.google.com/?q=${p.coords.latitude},${p.coords.longitude}`;
-                        btn.innerText = "✅ تم تحديد الموقع";
-                        btn.className = "bg-green-100 text-green-700 p-3 rounded-lg border border-green-200 text-sm";
-                    },
-                    () => { btn.innerText = "❌ فشل تحديد الموقع"; }
-                );
+                navigator.geolocation.getCurrentPosition((p) => {
+                    document.getElementById('coords').value = `https://maps.google.com/?q=${p.coords.latitude},${p.coords.longitude}`;
+                    btn.innerText = "✅ تم تحديد الموقع";
+                    btn.classList.add('bg-green-100', 'text-green-700', 'border-green-300');
+                }, () => { btn.innerText = "❌ فشل التحديد"; });
             }
         }
 
-        // إرسال البيانات
+        // 3. إرسال البيانات للتليجرام
         document.getElementById('complaintForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            
-            // بياناتك الخاصة (لن يراها المستخدم في الرسالة)
-            const myNumber = "9647838022724"; 
+            const btn = document.getElementById('submitBtn');
+            btn.innerText = "جاري الإرسال...";
+            btn.disabled = true;
 
-            // تجميع البيانات
-            const data = {
-                secret: secretToggle.checked ? "نعم" : "لا",
-                name: document.getElementById('userName').value || "مجهول",
-                phone: document.getElementById('userPhone').value || "غير مسجل",
-                type: document.getElementById('requestType').value,
-                sub: document.getElementById('subject').value,
-                msg: document.getElementById('message').value,
-                loc: document.getElementById('userLocation').value || "لم يحدد"
-            };
+            // --- معلومات البوت الخاصة بك (ضع معلوماتك هنا) ---
+            const botToken = "8986832171:AAEDJzSHact2lTzTO2PnxLITcdkhtjm1F9o"; 
+            const chatId = "290647010"; 
+            // ----------------------------------------------
 
-            // صياغة الرسالة للواتساب
-            const text = `*بلاغ من المنصة*%0Aسري: ${data.secret}%0Aالاسم: ${data.name}%0Aالهاتف: ${data.phone}%0Aالنوع: ${data.type}%0Aالموضوع: ${data.sub}%0Aالتفاصيل: ${data.msg}%0Aالموقع: ${data.loc}`;
+            const isSecret = secretToggle.checked ? "نعم (بلاغ سري 👤)" : "لا";
+            const name = document.getElementById('name').value || "غير مسجل";
+            const phone = document.getElementById('phone').value || "غير مسجل";
+            const type = document.getElementById('type').value;
+            const sub = document.getElementById('subject').value;
+            const msg = document.getElementById('details').value;
+            const loc = document.getElementById('coords').value || "لم يحدد";
 
-            // فتح الواتساب في نافذة مخفية أو صغيرة ثم إغلاقها فوراً لضمان الإرسال
-            // ملاحظة: لإرسال صامت حقيقي 100% تحتاج سيرفر، لكن هذه الطريقة هي الأفضل لـ HTML
-            const waUrl = `https://api.whatsapp.com/send?phone=${myNumber}&text=${text}`;
-            
-            // فتح الرابط في خلفية الصفحة
-            const win = window.open(waUrl, '_blank');
-            
-            // إظهار رسالة الشكر للمواطن فوراً
-            document.getElementById('successModal').style.display = 'flex';
-            
-            // إغلاق نافذة الواتساب بعد 5 ثوانٍ تلقائياً
-            setTimeout(() => { if(win) win.close(); }, 500);
-            
-            this.reset();
+            // تنسيق الرسالة لتظهر بشكل جميل في تليجرام
+            const fullMsg = `📢 *بلاغ جديد من المنصة*%0A%0A` +
+                            `👤 *سري:* ${isSecret}%0A` +
+                            `📝 *الاسم:* ${name}%0A` +
+                            `📞 *الهاتف:* ${phone}%0A` +
+                            `🏷 *النوع:* ${type}%0A` +
+                            `📌 *الموضوع:* ${sub}%0A` +
+                            `💬 *التفاصيل:* ${msg}%0A` +
+                            `📍 *الموقع:* ${loc}`;
+
+            const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${fullMsg}&parse_mode=Markdown`;
+
+            // إرسال الطلب
+            fetch(url)
+            .then(response => {
+                if(response.ok) {
+                    document.getElementById('successModal').style.display = 'flex';
+                    document.getElementById('complaintForm').reset();
+                } else {
+                    alert("حدث خطأ في الإرسال، تأكد من إعدادات البوت.");
+                }
+            })
+            .catch(() => alert("فشل الإرسال، يرجى التحقق من الاتصال بالإنترنت."))
+            .finally(() => {
+                btn.innerText = "إرسال الملاحظة";
+                btn.disabled = false;
+            });
         });
 
         function closeModal() {
