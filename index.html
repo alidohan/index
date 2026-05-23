@@ -7,13 +7,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { font-family: 'Cairo', sans-serif; background-color: #f4f7f9; }
+        body { font-family: 'Cairo', sans-serif; background-color: #f8fafc; }
         .bg-navy { background-color: #1a237e; }
         .bg-gold { background-color: #c5a021; }
         .hero-section {
-            background: linear-gradient(rgba(26, 35, 126, 0.85), rgba(26, 35, 126, 0.85)), 
-                        url('https://images.unsplash.com/photo-1521791136366-3e2183c51f33?auto=format&fit=crop&w=1000&q=80');
-            background-size: cover; background-position: center;
+            background: linear-gradient(rgba(26, 35, 126, 0.9), rgba(26, 35, 126, 0.9)), 
+                        url('https://images.unsplash.com/photo-1577495508048-b635879837f1?auto=format&fit=crop&w=1000&q=80');
+            background-size: cover;
         }
         #successModal {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -25,102 +25,135 @@
 
     <!-- نافذة النجاح -->
     <div id="successModal">
-        <div class="bg-white p-8 rounded-2xl max-w-sm w-full text-center shadow-2xl mx-4 border-t-8 border-green-500">
+        <div class="bg-white p-8 rounded-3xl max-w-sm w-full text-center shadow-2xl mx-4 border-t-8 border-green-500">
             <div class="text-green-500 text-6xl mb-4">✅</div>
             <h3 class="text-2xl font-bold text-navy mb-2">تم الإرسال بنجاح</h3>
-            <p class="text-gray-700 text-lg leading-relaxed">شكراً لكم وسيتم معالجة المشكلة وتنفيذ المقترح والملاحظة بأسرع وقت ممكن.</p>
-            <button onclick="closeModal()" class="mt-6 bg-navy text-white px-8 py-3 rounded-xl font-bold w-full shadow-lg hover:bg-blue-900">حسناً</button>
+            <p class="text-gray-700 leading-relaxed">شكراً لكم وسيتم معالجة المشكلة وتنفيذ المقترح والملاحظة بأسرع وقت ممكن.</p>
+            <button onclick="closeModal()" class="mt-6 bg-navy text-white px-8 py-3 rounded-xl font-bold w-full shadow-lg hover:bg-blue-900 transition">إغلاق</button>
         </div>
     </div>
 
     <nav class="bg-white shadow-md border-b-4 border-gold p-4 sticky top-0 z-50">
         <div class="max-w-6xl mx-auto flex justify-between items-center">
             <div class="flex items-center gap-3">
-                <div class="bg-navy p-2 rounded-lg text-white font-bold text-sm">الرضوية</div>
+                <div class="bg-navy p-2 rounded-lg text-white font-bold">الرضوية</div>
                 <h1 class="text-navy font-bold md:text-xl">مديرية ناحية الرضوية</h1>
             </div>
         </div>
     </nav>
 
-    <header class="hero-section text-white py-12 px-4 text-center">
-        <h2 class="text-3xl font-bold mb-2 italic">صوتك يصل... وملاحظتك تصنع الفرق</h2>
-        <p class="opacity-90">«نستمع إليكم… لنخدمكم بشكل أفضل»</p>
+    <header class="hero-section text-white py-10 px-4 text-center">
+        <h2 class="text-3xl font-bold mb-2">منصة صوت المواطن</h2>
+        <p class="opacity-90 italic">«نستمع إليكم… لنخدمكم بشكل أفضل»</p>
     </header>
 
-    <main class="max-w-3xl mx-auto -mt-10 mb-20 px-4">
-        <div class="bg-white rounded-2xl shadow-xl p-6 md:p-10 border border-gray-100">
-            <form id="complaintForm" class="space-y-5">
+    <main class="max-w-4xl mx-auto -mt-10 mb-20 px-4">
+        <div class="bg-white rounded-3xl shadow-2xl p-6 md:p-10 border border-gray-100">
+            <form id="complaintForm" class="space-y-6">
                 
                 <!-- خيار الإرسال السري -->
-                <div class="bg-blue-50 p-4 rounded-xl border border-blue-100">
-                    <div class="flex items-center justify-between mb-2">
+                <div class="bg-blue-50 p-4 rounded-2xl border border-blue-100">
+                    <div class="flex items-center justify-between">
                         <span class="font-bold text-navy">إرسال الطلب بشكل سري؟</span>
                         <label class="relative inline-flex items-center cursor-pointer">
                             <input type="checkbox" id="secretToggle" class="sr-only peer">
                             <div class="w-11 h-6 bg-gray-300 rounded-full peer peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:right-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-gold"></div>
                         </label>
                     </div>
-                    <p id="secretNote" class="text-xs text-blue-700 font-bold hidden bg-blue-100 p-2 rounded">
-                         ⚠️ يطلع عليها مدير الناحية الحقوقي علي غضب الغزالي المحترم فقط.
+                    <p id="secretNote" class="text-xs text-blue-800 font-bold mt-2 hidden bg-blue-100 p-3 rounded-lg border border-blue-200">
+                        ⚠️ يطلع عليها مدير الناحية الحقوقي علي غضب الغزالي المحترم فقط.
                     </p>
                 </div>
 
-                <!-- الحقول أصبحت إجبارية (Required) -->
-                <div class="grid md:grid-cols-2 gap-4">
-                    <input type="text" id="userName" placeholder="الاسم الكامل" required class="w-full p-4 rounded-xl border outline-none focus:ring-2 focus:ring-navy transition">
-                    <input type="tel" id="userPhone" placeholder="رقم الهاتف" required class="w-full p-4 rounded-xl border outline-none focus:ring-2 focus:ring-navy transition">
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-gray-700 font-bold mb-2">الاسم الكامل</label>
+                        <input type="text" id="userName" placeholder="اكتب اسمك الثلاثي" required class="w-full p-4 rounded-xl border bg-gray-50 outline-none focus:ring-2 focus:ring-navy transition">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 font-bold mb-2">رقم الهاتف</label>
+                        <input type="tel" id="userPhone" placeholder="07XXXXXXXX" required class="w-full p-4 rounded-xl border bg-gray-50 outline-none focus:ring-2 focus:ring-navy transition">
+                    </div>
                 </div>
 
-                <div class="grid md:grid-cols-2 gap-4">
-                    <select id="requestType" onchange="updateButtonText()" class="w-full p-4 rounded-xl border outline-none bg-white">
-                        <option value="شكوى">شكوى</option>
-                        <option value="ملاحظة">ملاحظة</option>
-                        <option value="مقترح">مقترح</option>
-                        <option value="طلب خدمة">طلب خدمة</option>
-                    </select>
-                    <button type="button" onclick="getLocation()" id="locBtn" class="bg-gray-100 p-4 rounded-xl border text-sm hover:bg-gray-200 transition">
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-gray-700 font-bold mb-2">توجه الملاحظة إلى:</label>
+                        <select id="targetDept" class="w-full p-4 rounded-xl border bg-white outline-none focus:ring-2 focus:ring-navy">
+                            <option value="مدير الناحية مباشرة">مدير الناحية (مباشر)</option>
+                            <option value="الشعبة القانونية">الشعبة القانونية</option>
+                            <option value="شعبة المولدات">شعبة المولدات</option>
+                            <option value="شعبة المختارية">شعبة المختارية</option>
+                            <option value="الخدمات والبلدية">الخدمات والبلدية</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 font-bold mb-2">نوع الطلب:</label>
+                        <select id="requestType" onchange="updateButtonText()" class="w-full p-4 rounded-xl border bg-white outline-none focus:ring-2 focus:ring-navy">
+                            <option value="شكوى">شكوى</option>
+                            <option value="ملاحظة">ملاحظة</option>
+                            <option value="مقترح">مقترح</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-gray-700 font-bold mb-2">المنطقة / الحي</label>
+                        <input type="text" id="regionName" placeholder="اسم المنطقة" required class="w-full p-4 rounded-xl border bg-gray-50 outline-none focus:ring-2 focus:ring-navy">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 font-bold mb-2">اسم المختار</label>
+                        <input type="text" id="mukhtarName" placeholder="اختياري" class="w-full p-4 rounded-xl border bg-gray-50 outline-none focus:ring-2 focus:ring-navy">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-gray-700 font-bold mb-2">عنوان الملاحظة</label>
+                    <input type="text" id="subject" placeholder="موضوع مختصر" required class="w-full p-4 rounded-xl border outline-none focus:border-navy">
+                </div>
+
+                <div>
+                    <label class="block text-gray-700 font-bold mb-2">التفاصيل</label>
+                    <textarea id="details" rows="4" placeholder="اكتب هنا تفاصيل المشكلة أو المقترح..." required class="w-full p-4 rounded-xl border outline-none focus:border-navy"></textarea>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6 items-end">
+                    <div>
+                        <label class="block text-gray-700 font-bold mb-2">إرفاق صورة (إن وجد)</label>
+                        <input type="file" id="userImage" accept="image/*" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-navy file:text-white hover:file:bg-blue-800 transition">
+                    </div>
+                    <button type="button" onclick="getLocation()" id="locBtn" class="bg-gray-100 p-4 rounded-xl border font-bold text-gray-700 hover:bg-gray-200 transition">
                        📍 تحديد موقع المشكلة
                     </button>
                     <input type="hidden" id="userCoords">
                 </div>
 
-                <input type="text" id="subject" placeholder="عنوان الملاحظة" required class="w-full p-4 rounded-xl border outline-none focus:border-navy">
-                <textarea id="details" rows="4" placeholder="اكتب التفاصيل هنا..." required class="w-full p-4 rounded-xl border outline-none focus:border-navy"></textarea>
-
-                <!-- حقل رفع الصورة -->
-                <div class="p-4 border-2 border-dashed border-gray-300 rounded-xl bg-gray-50">
-                    <label class="block text-gray-700 text-sm font-bold mb-2">إرفاق صورة (اختياري):</label>
-                    <input type="file" id="userImage" accept="image/*" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-navy file:text-white hover:file:bg-blue-800">
-                </div>
-
-                <button type="submit" id="submitBtn" class="w-full bg-navy text-white py-4 rounded-2xl font-bold text-xl hover:bg-blue-900 shadow-xl transition transform active:scale-95">
+                <button type="submit" id="submitBtn" class="w-full bg-navy text-white py-5 rounded-2xl font-bold text-2xl hover:bg-blue-900 shadow-xl transition transform active:scale-95">
                     إرسال الشكوى
                 </button>
             </form>
         </div>
     </main>
 
-    <footer class="bg-gray-900 text-gray-500 py-8 text-center border-t-4 border-gold">
-        <p class="font-bold">جميع الحقوق محفوظة © 2026 - مديرية ناحية الرضوية</p>
+    <footer class="bg-gray-900 text-gray-500 py-10 text-center border-t-4 border-gold">
+        <p class="font-bold text-white">مديرية ناحية الرضوية - المكتب الإعلامي</p>
+        <p class="mt-2 text-sm">جميع الحقوق محفوظة © 2026</p>
     </footer>
 
     <script>
-        // 1. تحديث نص الزر والتحكم في الإرسال السري
+        // 1. تحديث النصوص بناءً على الاختيارات
         function updateButtonText() {
             const type = document.getElementById('requestType').value;
             const btn = document.getElementById('submitBtn');
-            if (type === "شكوى") btn.innerText = "إرسال الشكوى";
-            else if (type === "ملاحظة") btn.innerText = "إرسال الملاحظة";
-            else if (type === "مقترح") btn.innerText = "إرسال المقترح";
-            else btn.innerText = "إرسال الطلب";
+            btn.innerText = "إرسال " + type;
         }
 
         document.getElementById('secretToggle').addEventListener('change', function() {
-            const note = document.getElementById('secretNote');
-            note.style.display = this.checked ? 'block' : 'none';
+            document.getElementById('secretNote').style.display = this.checked ? 'block' : 'none';
         });
 
-        // 2. تحديد الموقع الجغرافي
+        // 2. تحديد الموقع
         function getLocation() {
             const btn = document.getElementById('locBtn');
             if (navigator.geolocation) {
@@ -128,12 +161,12 @@
                 navigator.geolocation.getCurrentPosition((p) => {
                     document.getElementById('userCoords').value = `https://maps.google.com/?q=${p.coords.latitude},${p.coords.longitude}`;
                     btn.innerText = "✅ تم تحديد الموقع";
-                    btn.classList.add('bg-green-100', 'text-green-700');
+                    btn.classList.add('bg-green-100', 'text-green-700', 'border-green-300');
                 }, () => { btn.innerText = "❌ فشل التحديد"; });
             }
         }
 
-        // 3. إرسال البيانات والتحقق من الحقول
+        // 3. إرسال البيانات للتليجرام
         document.getElementById('complaintForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             const btn = document.getElementById('submitBtn');
@@ -141,55 +174,51 @@
             btn.innerText = "جاري الإرسال...";
             btn.disabled = true;
 
-            // --- معلومات البوت الخاصة بك (ضع معلوماتك هنا) ---
-            const botToken = "ضع_هنا_التوكن_الخاص_بـBotFather";
-            const chatId = "ضع_هنا_الـChatID_الخاص_بـUserInfoBot";
-            // ----------------------------------------------
+            // --- معلومات البوت الخاصة بك ---
+            const botToken = "8986832171:AAEDJzSHact2lTzTO2PnxLITcdkhtjm1F9o";
+            const chatId = "290647010";
+            // ------------------------------
 
-            const isSecret = document.getElementById('secretToggle').checked ? "نعم (يطلع عليها المدير فقط 👤)" : "لا";
+            const isSecret = document.getElementById('secretToggle').checked ? "نعم (للمدير فقط 👤)" : "لا";
             const name = document.getElementById('userName').value;
             const phone = document.getElementById('userPhone').value;
+            const target = document.getElementById('targetDept').value;
             const type = document.getElementById('requestType').value;
+            const region = document.getElementById('regionName').value;
+            const mukhtar = document.getElementById('mukhtarName').value || "غير مذكور";
             const sub = document.getElementById('subject').value;
-            const details = document.getElementById('details').value;
+            const desc = document.getElementById('details').value;
             const loc = document.getElementById('userCoords').value || "لم يحدد";
             const imageFile = document.getElementById('userImage').files[0];
 
             const fullMsg = `📢 *بلاغ جديد من المنصة*%0A%0A` +
+                            `🏢 *إلى:* ${target}%0A` +
                             `👤 *سري:* ${isSecret}%0A` +
                             `📝 *الاسم:* ${name}%0A` +
                             `📞 *الهاتف:* ${phone}%0A` +
+                            `🌍 *المنطقة:* ${region}%0A` +
+                            `👴 *المختار:* ${mukhtar}%0A` +
                             `🏷 *النوع:* ${type}%0A` +
                             `📌 *الموضوع:* ${sub}%0A` +
-                            `💬 *التفاصيل:* ${details}%0A` +
+                            `💬 *التفاصيل:* ${desc}%0A` +
                             `📍 *الموقع:* ${loc}`;
 
             try {
-                let url = `https://api.telegram.org/bot${botToken}/sendMessage`;
-                
-                // إذا وجدت صورة، نستخدم sendPhoto
                 if (imageFile) {
                     const formData = new FormData();
                     formData.append('chat_id', chatId);
                     formData.append('photo', imageFile);
-                    formData.append('caption', `بلاغ جديد من المنصة\n\nسري: ${isSecret}\nالاسم: ${name}\nالهاتف: ${phone}\nالنوع: ${type}\nالموضوع: ${sub}\nالتفاصيل: ${details}\nالموقع: ${loc}`);
-                    
-                    await fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, {
-                        method: 'POST',
-                        body: formData
-                    });
+                    formData.append('caption', `بلاغ جديد: ${target}\nسري: ${isSecret}\nالاسم: ${name}\nالهاتف: ${phone}\nالمنطقة: ${region}\nالمختار: ${mukhtar}\nالنوع: ${type}\nالموضوع: ${sub}\nالتفاصيل: ${desc}\nالموقع: ${loc}`);
+                    await fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, { method: 'POST', body: formData });
                 } else {
-                    // إذا لم توجد صورة، نرسل نص فقط
-                    await fetch(`${url}?chat_id=${chatId}&text=${fullMsg}&parse_mode=Markdown`);
+                    await fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${fullMsg}&parse_mode=Markdown`);
                 }
 
-                // إظهار رسالة النجاح
                 document.getElementById('successModal').style.display = 'flex';
                 this.reset();
                 updateButtonText();
-
             } catch (error) {
-                alert("حدث خطأ أثناء الإرسال، يرجى التحقق من الاتصال بالإنترنت.");
+                alert("حدث خطأ أثناء الإرسال. تأكد من اتصال الإنترنت.");
             } finally {
                 btn.innerText = originalText;
                 btn.disabled = false;
