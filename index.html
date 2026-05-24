@@ -55,12 +55,12 @@
             <form id="complaintForm" class="space-y-6">
                 
                 <!-- خيار الإرسال السري -->
-                <div class="bg-blue-50 p-5 rounded-2xl border border-blue-100">
+                <div class="bg-blue-50 p-5 rounded-2xl border border-blue-100 shadow-sm">
                     <div class="flex items-center justify-between">
-                        <span class="font-bold text-navy">إرسال الطلب بشكل سري؟</span>
+                        <span class="font-bold text-navy">إرسال الطلب بشكل سري؟ (للمدير فقط)</span>
                         <label class="relative inline-flex items-center cursor-pointer">
                             <input type="checkbox" id="secretToggle" class="sr-only peer">
-                            <div class="w-12 h-6 bg-gray-300 rounded-full peer peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:right-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-gold"></div>
+                            <div class="w-12 h-6 bg-gray-300 rounded-full peer peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:right-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-gold transition-all"></div>
                         </label>
                     </div>
                     <p id="secretNote" class="text-xs text-blue-800 font-bold mt-3 hidden bg-blue-100 p-3 rounded-lg border border-blue-200">
@@ -76,7 +76,7 @@
                     </div>
                     <div>
                         <label class="block text-gray-700 font-bold mb-2">رقم الهاتف</label>
-                        <input type="tel" id="userPhone" placeholder="رقم الهاتف الخاص بك" required class="w-full p-4 rounded-xl border bg-gray-50 outline-none focus:ring-2 focus:ring-navy">
+                        <input type="tel" id="userPhone" placeholder="رقم الموبايل" required class="w-full p-4 rounded-xl border bg-gray-50 outline-none focus:ring-2 focus:ring-navy">
                     </div>
                 </div>
 
@@ -88,6 +88,9 @@
                             <option value="المدير">مدير الناحية مباشرة</option>
                             <option value="القانونية">الشعبة القانونية</option>
                             <option value="المولدات">شعبة المولدات</option>
+                            <option value="البلديات">شعبة البلديات</option>
+                            <option value="الكهرباء">شعبة الكهرباء</option>
+                            <option value="الماء">شعبة الماء</option>
                             <option value="المختارية">شعبة المختارية</option>
                         </select>
                     </div>
@@ -126,7 +129,7 @@
                 <!-- المرفقات والموقع -->
                 <div class="grid md:grid-cols-2 gap-6 items-end">
                     <div>
-                        <label class="block text-gray-700 font-bold mb-2">إرفاق صورة (اختياري)</label>
+                        <label class="block text-gray-700 font-bold mb-2 text-sm">إرفاق صورة (اختياري)</label>
                         <input type="file" id="userImage" accept="image/*" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:bg-navy file:text-white hover:file:bg-blue-900 transition">
                     </div>
                     <button type="button" onclick="getLocation()" id="locBtn" class="bg-gray-100 p-4 rounded-xl border font-bold text-gray-700 hover:bg-gray-200 transition">📍 تحديد الموقع الجغرافي</button>
@@ -151,16 +154,18 @@
     </footer>
 
     <script>
-        // الإعدادات الرئيسية
+        // --- الإعدادات الرسمية للبوت والمجموعات ---
         const BOT_TOKEN = "8986832171:AAEDJzSHact2lTzTO2PnxLITcdkhtjm1F9o";
-        const DIRECTOR_CHAT_ID = "290647010"; // الأيدي الخاص بك كمدير
+        const DIRECTOR_ID = "290647010"; // الأيدي الخاص بك كمدير
 
-        // توزيع الأيدي على المجموعات (التجربة حالياً على حسابك)
         const GROUPS_IDS = {
-            "المدير": DIRECTOR_CHAT_ID,
-            "القانونية": "290647010", // -5242195822
-            "المولدات": "290647010", // -5236252488
-            "المختارية": "290647010" // استبدلها لاحقاً بأيدي المجموعة
+            "المدير": DIRECTOR_ID,
+            "القانونية": "-5242195822",
+            "المولدات": "-5236252488",
+            "البلديات": "-5272119917",
+            "الكهرباء": "-4957303068",
+            "الماء": "-5215582580",
+            "المختارية": DIRECTOR_ID // يمكن تعديله لاحقاً بأيدي خاص
         };
 
         const secretToggle = document.getElementById('secretToggle');
@@ -208,7 +213,7 @@
             const isSecret = secretToggle.checked;
             const name = document.getElementById('userName').value;
             const phone = document.getElementById('userPhone').value;
-            const dept = isSecret ? "المدير (سري)" : document.getElementById('targetDept').value;
+            const dept = isSecret ? "مدير الناحية (سري)" : document.getElementById('targetDept').value;
             const type = document.getElementById('requestType').value;
             const region = document.getElementById('regionName').value;
             const mukhtar = document.getElementById('mukhtarName').value;
@@ -218,7 +223,7 @@
             const imageFile = document.getElementById('userImage').files[0];
 
             // تحديد وجهة الرسالة (إذا سري تذهب للمدير، وإلا للمجموعة المختارة)
-            const targetID = isSecret ? DIRECTOR_CHAT_ID : (GROUPS_IDS[dept] || DIRECTOR_CHAT_ID);
+            const targetID = isSecret ? DIRECTOR_ID : (GROUPS_IDS[dept] || DIRECTOR_ID);
 
             const msgText = `📢 *بلاغ جديد من المنصة*%0A%0A` +
                             `🏢 *إلى:* ${isSecret ? "مدير الناحية (سري 👤)" : dept}%0A` +
@@ -236,24 +241,23 @@
                     const fd = new FormData();
                     fd.append('chat_id', targetID);
                     fd.append('photo', imageFile);
-                    fd.append('caption', `بلاغ جديد: ${sub}\nإلى: ${isSecret ? "المدير (سري)" : dept}\nالاسم: ${name}\nالهاتف: ${phone}\nالمنطقة: ${region}\nالمختار: ${mukhtar}\nالتفاصيل: ${details}\nالموقع: ${loc}`);
+                    fd.append('caption', `إلى: ${isSecret ? "المدير (سري)" : dept}\nالاسم: ${name}\nالهاتف: ${phone}\nالمنطقة: ${region}\nالمختار: ${mukhtar}\nالموضوع: ${sub}\nالتفاصيل: ${details}\nالموقع: ${loc}`);
                     await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, { method: 'POST', body: fd });
                 } else {
                     await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${targetID}&text=${msgText}&parse_mode=Markdown`);
                 }
 
-                // إظهار نسخة للمدير إذا لم تكن موجهة له (اختياري للعلم)
-                if(!isSecret && targetID !== DIRECTOR_CHAT_ID) {
-                    await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${DIRECTOR_CHAT_ID}&text=${encodeURIComponent("نسخة إطلاع للمدير:\n" + msgText)}`);
+                // نسخة للمدير إذا لم تكن الرسالة موجهة له (لأغراض المتابعة)
+                if(!isSecret && targetID !== DIRECTOR_ID) {
+                    await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${DIRECTOR_ID}&text=${encodeURIComponent("نسخة إطلاع للمدير:\n" + msgText.replace(/%0A/g, '\n'))}`);
                 }
 
-                // عرض رسالة النجاح
                 document.getElementById('successModal').style.display = 'flex';
                 this.reset();
                 deptContainer.style.display = 'block';
                 updateButtonText();
             } catch (error) {
-                alert("حدث خطأ أثناء الإرسال، يرجى المحاولة لاحقاً.");
+                alert("حدث خطأ أثناء الإرسال. يرجى التحقق من اتصال الإنترنت.");
             } finally {
                 btn.innerText = originalText;
                 btn.disabled = false;
